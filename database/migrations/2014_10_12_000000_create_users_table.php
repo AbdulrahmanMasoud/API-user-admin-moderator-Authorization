@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('utype',['ADM','USR'])->default('USR')->comment('USR For Normal User And ADM For Admins');
+            $table->enum('utype',['ADM','MOD','USR'])->default('USR')->comment('USR For Normal User And ADM For Admins');
             $table->timestamps();
         });
     }
