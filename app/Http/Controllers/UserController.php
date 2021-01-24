@@ -49,7 +49,15 @@ class UserController extends Controller
                 'msg'=>'You Are Login',
                 "admin_token"=>$admin_token
             ]);
-        }else{ // If This User Is Not Admin
+        }elseif(Gate::allows('is-Moderator')){
+            $moderator_token = Auth::attempt($credentials);
+            return response()->json([
+                'status'=>true,
+                'msg'=>'You Are Login',
+                "moderator_token"=>$moderator_token
+            ]);
+        }
+        else{ // If This User Is Not Admin
             $user_token = Auth::attempt($credentials);
             return response()->json([
                 'status'=>true,

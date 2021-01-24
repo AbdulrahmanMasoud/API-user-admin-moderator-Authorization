@@ -44,8 +44,15 @@ class User extends Authenticatable implements JWTSubject
         }else{
             return false;
         }
-      
     }
+    public function isModerator(){
+        if(Auth::user()->utype === "MOD"){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
      /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

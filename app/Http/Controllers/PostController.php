@@ -138,7 +138,7 @@ class PostController extends Controller
             }
         
     }
-
+ 
     /*
     * This Method To Delete Posts 
     * ['For Admin'] He Can Delete All Posts
@@ -146,7 +146,7 @@ class PostController extends Controller
     */
     public function destroy($id)
     {
-        if (Gate::allows('is-Admin')) { //Check If This User Is Admin He Can Delete Any Post
+        if (Gate::allows('is-Admin') || Gate::allows('is-Moderator')) { //Check If This User Is Admin He Can Delete Any Post
             $delete = Post::where('id',$id)->delete();
             if($delete != 1){
                 return response()->json([
