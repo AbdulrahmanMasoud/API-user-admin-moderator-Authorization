@@ -27,5 +27,5 @@ Route::group(['middleware' => ['auth:api'],'prefix' => 'user'], function () {
     Route::post('add-post',[PostController::class,'store']);
     Route::put('edit-post/{id}',[PostController::class,'update']);
     Route::delete('delete-post/{id}',[PostController::class,'destroy']);
-    Route::post('logout',[UserController::class,'logout'])->withoutMiddleware('auth:api');
+    Route::post('logout',[UserController::class,'logout']);
 });
