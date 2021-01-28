@@ -15,6 +15,37 @@ class PostController extends Controller
     * ['For Admin'] Will Get All Posts
     * ['For User'] Will Get His Posts Only
     */
+
+/**
+     * @OA\Get(
+     *      path="/api/user/posts",
+     *      
+     *      tags={"Posts"},
+     *      summary="Posts User System",
+     *      description="Posts In User System",
+     *      security={
+     *         {"bearer": {}}
+     *     },
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Success Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
+*/
+
+
     public function index()
     {
         
@@ -26,16 +57,21 @@ class PostController extends Controller
             return response()->json([
                 'status'=>true,
                 'posts'=>$posts
-            ]);
+
+            ],200);
+
         }else{ // If user Not Admin Will Get His Posts Only
             $posts = Post::where('user_id',Auth::id())->get();
             if(count($posts)<1){
-                $posts='There Is No Posts';
+                return response()->json([
+                    'status'=>true,
+                    'msg'=>'ther is no posts'
+                ],404);
             }
             return response()->json([
                 'status'=>true,
                 'posts'=>$posts
-            ]);
+            ],200);
         }
     
     }
